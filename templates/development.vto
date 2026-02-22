@@ -1,433 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
 
-    <title>{{ name }} - {{ message }}</title>
-    
-    <meta name="viewport" content="width=device-width">
+<head>
+  <meta charset="utf-8">
 
-    <meta name="description" content="{{ name }} - {{ message }}">
+  <title>{{ name }} - {{ message }}</title>
 
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+  <meta name="viewport" content="width=device-width">
 
-      :root {
-        --primary-shade-100: #fefefe;
-        --primary-shade-200: #fbfbfc;
-        --primary-shade-300: #fafafb;
-        --primary-shade-400: #f3f4f7;
-        --primary-shade-500: #ebecf0;
-        --primary-shade-900: #d2d6de;
-        --primary-shade-700: #9ca6b6;
-        --primary-shade-800: #6d768a;
-        --primary-shade-900: #4f5c6e;
-        --primary-shade-1000: #3e495c;
-        --primary-shade-1100: #283342;
-        --primary-shade-1200: #1a2332;
-        --primary-shade-1300: #0e1522;
+  <meta name="description" content="{{ name }} - {{ message }}">
 
-        --color-accent: #c4b5fd;
-        --color-accent-light: #ddd6fe;
-        --color-accent-dark: #bf95f6;
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Outfit:wght@100..900&family=Recursive:wght@300..1000&display=swap");
 
-        --secondary-color-accent: #86efac;
-        --background-color: #f3f4f7;
-        --dark-background-color: #0e1522;
-        --code-window-background-color: #0e1522;
-        --font-color: var(--primary-shade-200);
-        --font-family: -apple-system,"system-ui","segoe ui",Helvetica,Arial,sans-serif,"apple color emoji","segoe ui emoji";
-        --subtle-font-color: var(--primary-shade-400);
-        --heading-color: var(--color-white);
-        --heading-font-family: "Jetbrains Mono";
-        
-        --primary-accent-color: var(--color-accent);
-        --secondary-accent-color: var(--secondary-color-accent);
-      }
+    :root {
+      --shade: #101113;
+      --shade-0: #191b1f;
+      --shade-50: #1f2228;
+      --shade-100: #282b33;
+      --shade-200: #33373f;
+      --shade-300: #4a4f5a;
+      --shade-400: #6b7280;
+      --shade-500: #9095a0;
+      --shade-600: #a8adb8;
+      --shade-700: #c5c9d1;
+      --shade-800: #e1e4e8;
+      --shade-900: #f6f8fa;
 
-      /* Base Styles */
+      --background-color: var(--shade);
+      --dark-background-color: var(--shade-0);
+      --code-window-background-color: var(--shade);
+      --font-color: var(--shade-900);
+      --font-family: "Inter", -apple-system, "system-ui", Segoe UI, system-ui, sans-serif;
+      --heading-color: var(--color-white);
+    }
 
-      * {
-        box-sizing: border-box;
-      }
+    /* Base Styles */
 
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      padding: 2.5rem 1rem;
+      background-color: var(--shade-0);
+      color: var(--font-color);
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-optical-sizing: auto;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 1.625;
+    }
+
+    @media screen and (min-width: 720px) {
       body {
-        padding: 2.5rem 1rem;
-        background: var(--dark-background-color);
-        color: var(--font-color);
-        font-family: var(--font-family);
-        font-size: 16px;
-        font-optical-sizing: auto;
-        font-style: normal;
-        font-weight: 300;
-        line-height: 1.625;
+        padding: 2.5rem;
       }
+    }
 
-      @media screen and (min-width: 720px) {
-        body {
-          padding: 2.5rem;
-        }
-      }
+    /* Typography */
 
-      /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 0 0 1rem;
+      color: var(--heading-color);
+      font-weight: 700;
+    }
 
-      h1,
-      h2,
-      h3,
-      h4 {
-        margin: 0 0 1rem;
-        color: var(--heading-color);
-        font-weight: 700;
-        font-family: var(--heading-font-family);
-      }
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2rem;
+      font-weight: 500;
+    }
 
-      h1 {
-        margin: 0 0 0.5rem;
-        font-size: 2rem;
-      }
+    h2 {
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--shade-1000);
+      font-size: 1.25rem;
+    }
 
-      h2 {
-        padding-bottom: 0.75rem;
-        border-bottom: 1px solid var(--primary-shade-1000);
-        font-size: 1.25rem;
-      }
+    /* Layout */
 
-      /* Layout */
+    .container {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+    }
 
-      .container {
-        width: 100%;
-        max-width: 1024px;
-        margin: 0 auto;
-      }
+    header.title {
+      margin-bottom: 2rem;
+    }
 
-      header.title {
-        margin-bottom: 2rem;
-      }
+    main .card {
+      margin-bottom: 2rem;
+    }
 
-      main .card {
-        margin-bottom: 2rem;
-      }
+    main details::marker {
+      color: var(--shade-400);
+      font-size: 1rem;
+    }
 
-      main details::marker {
-        color: var(--primary-shade-400);
-        font-size: 1rem;
-      }
+    main details summary {
+      color: var(--heading-color);
+      font-family: var(--heading-font-family);
+      font-size: 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
 
-      main details summary {
-        color: var(--heading-color);
-        font-family: var(--heading-font-family);
-        font-size: 1.25rem;
-        font-weight: 600;
-        cursor: pointer;
-      }
+    main details:open summary {
+      margin-bottom: 1.5rem;
+    }
 
-      main details:open summary {
-        margin-bottom: 1.5rem;
-      }
+    /* Components */
 
-      /* Components */
+    /* Card Component */
+    .card {
+      background: var(--dark-background-color);
+      padding: 1.5rem;
+      border: 1px solid var(--shade-200);
+      border-radius: 0.25rem;
+    }
 
-      /* Card Component */
-      .card {
-        background: var(--dark-background-color);
-        padding: 1.5rem;
-        border: 1px solid var(--primary-shade-1000);
-        border-radius: 0.25rem;
-      }
+    /* Stack Component */
+    .stack ol {
+      margin: 0;
+      padding: 0;
+    }
 
-      /* Stack Component */
-      .stack ol {
-        margin: 0;
-        padding: 0;
-      }
+    .stack-line-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      overflow: hidden;
+    }
 
-      .stack-line-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        overflow: hidden;
-      }
+    .stack-line {
+      display: grid;
+      grid-template-columns: 2.5rem auto;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--shade-100);
+      counter-increment: countdown -1;
+    }
 
-      .stack-line {
-        display: grid;
-        grid-template-columns: 2.5rem auto;
-        align-items: center;
-        padding: 1rem 0;
-        border-bottom: 1px solid var(--primary-shade-1000);
-        counter-increment: countdown -1;
-      }
+    .stack-line::before {
+      content: counter(countdown);
+      display: inline-block;
+      width: 1rem;
+      color: var(--heading-color);
+      text-align: right;
+    }
 
-      .stack-line::before {
-        content: counter(countdown);
-        display: inline-block;
-        width: 1rem;
-        color: var(--heading-color);
-        text-align: right;
-      }
+    .stack-line:last-of-type {
+      padding-bottom: 0;
+      border: none;
+    }
 
-      .stack-line:last-of-type {
-        padding-bottom: 0;
-        border: none;
-      }
+    .stack-line-content {
+      overflow-x: scroll;
+      word-wrap: break-word;
+    }
 
-      .stack-line-content {
-        overflow-x: scroll;
-        word-wrap: break-word;
-      }
+    .stack-line-position {
+      color: var(--primary-accent-color);
+    }
 
-      .stack-line-position {
-        color: var(--primary-accent-color);
-      }
+    /* Key-Value Component */
+    .key-value {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      border-bottom: 1px dashed var(--shade-200);
+    }
 
-      /* Key-Value Component */
+    .key-value:first-of-type {
+      padding-top: 0;
+    }
+
+    .key-value:last-of-type {
+      padding-bottom: 0;
+      border: none;
+    }
+
+    .key-value .key {
+      min-width: 220px;
+      overflow: hidden;
+      color: var(--heading-color);
+      font-weight: 700;
+      word-wrap: break-word;
+    }
+
+    .key-value .value {
+      overflow: hidden;
+      font-style: italic;
+      word-wrap: break-word;
+    }
+
+    @media screen and (max-width: 720px) {
       .key-value {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        padding: 1rem 0;
-        border-bottom: 1px dashed var(--primary-shade-900);
-      }
-
-      .key-value:first-of-type {
-        padding-top: 0;
-      }
-
-      .key-value:last-of-type {
-        padding-bottom: 0;
-        border: none;
-      }
-
-      .key-value .key {
-        min-width: 220px;
-        overflow: hidden;
-        color: var(--heading-color);
-        font-weight: 700;
-        word-wrap: break-word;
-      }
-
-      .key-value .value {
-        overflow: hidden;
-        font-style: italic;
-        word-wrap: break-word;
-      }
-
-      @media screen and (max-width: 720px) {
-        .key-value {
-          display: grid;
-        }
-      }
-
-      /* Errors */
-      .errors ul {
-        margin: 0;
-      }
-
-      /* File Details Component */
-      .file-details {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .file-details .open svg {
-        width: 1.75rem;
-        height: 1.75rem;
-      }
-
-      .file-details .open a {
-        color: var(--font-color);
-      }
-
-      .file-details .open a:hover {
-        color: var(--primary-accent-color);
-      }
-
-      .file-details .path {
-        overflow: hidden;
-        word-wrap: break-word;
-      }
-
-      /* Code Window Component */
-      .code-window {
-        counter-reset: step;
-        font-size: 1rem;
-      }
-
-      .code-window code {
         display: grid;
-        line-height: 1rem;
       }
+    }
 
-      .code-window .line {
-        display: block;
-        width: 100%;
-        padding: 0.375rem 0;
-      }
+    /* Errors */
+    .errors ul {
+      margin: 0;
+    }
 
-      .code-window .line::before {
-        content: counter(step);
-        display: inline-block;
-        width: 1rem;
-        margin-right: 1.5rem;
-        color: var(--font-color);
-        text-align: right;
-        counter-increment: step;
-      }
+    /* File Details Component */
+    .file-details {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
 
-      .code-window .highlighted-line,
-      .code-window .highlighted-line span {
-        background: var(--primary-shade-1200) !important;
-      }
+    .file-details .open svg {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
 
-      .code-window .line:hover,
-      .code-window .line:hover span {
-        background: var(--primary-shade-1200) !important;
-      }
+    .file-details .open a {
+      color: var(--font-color);
+    }
 
-      code {
-        font-family: var(--heading-font-family) !important;
-      }
+    .file-details .open a:hover {
+      color: var(--primary-accent-color);
+    }
 
-      pre.shiki, .defaultStyles pre.shiki {
-        border: 1px solid var(--primary-shade-1000);
-        border-radius: 0.25rem;
-        background: var(--code-window-background-color) !important;
-        padding: 1.25rem;
-        overflow: scroll;
-        margin: 0;
-      }
+    .file-details .path {
+      overflow: hidden;
+      word-wrap: break-word;
+    }
 
-      /* Environment Details Component */
-      .environment-details > div {
-        border: 1px solid var(--primary-shade-1000);
-        border-radius: 0.25rem;
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-      }
+    /* Code Window Component */
+    .code-window {
+      counter-reset: step;
+      font-size: 1rem;
+    }
 
-      .environment-details .request-headers {
-        margin-bottom: 0;
-      }
+    .code-window code {
+      display: grid;
+      line-height: 1rem;
+    }
 
-      /* Utility Classes */
+    .code-window .line {
+      display: block;
+      width: 100%;
+      padding: 0.375rem 0;
+    }
 
-      .notice {
-        color: var(--subtle-font-color);
-        font-size: 0.875rem;
-        text-align: center;
-      }
-    </style>
-  </head>
-  
-  <body>
-    <header class="title container">
-      <h1>
-        {{ if context.response.status }}
-          {{ context.response.status }} - 
-        {{ /if }}
-        {{ name }}
-      </h1>
-      <div class="subtitle">
-        {{ message }}
-      </div>
-    </header>
-  
-    <main class="container">
-        {{ if errors?.length }}
-        <details class="errors card" open>
-          <summary>&nbsp;Errors {{ it.errors.length }}</summary>
-          
-          <ul>
-          {{ for error of errors }}
-            {{ for message of error }}
-              <li>{{ message }}</li>
-            {{ /for }}
-          {{ /for }}
-          </ul>
-        </details>
-        {{ /if }}
+    .code-window .line::before {
+      content: counter(step);
+      display: inline-block;
+      width: 1rem;
+      margin-right: 1.5rem;
+      color: var(--font-color);
+      text-align: right;
+      counter-increment: step;
+    }
 
-        <details class="code-container card" open>
-          <summary>&nbsp;Originating file</summary>
+    .code-window .highlighted-line,
+    .code-window .highlighted-line span {
+      background: var(--shade-50) !important;
+    }
 
-          <div class="file-details">
-            <div class="path">
-              <em>{{ stack.lines[0].file }}</em>
-            </div>
-            <div class="open">
-              <a href="vscode://file/{{ stack.lines[0].file }}" title="Open in code editor">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75 16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
-                </svg>
-              </a>
-            </div>
-          </div>
+    .code-window .line:hover,
+    .code-window .line:hover span {
+      background: var(--shade-50) !important;
+    }
 
-          <div class="code-window">
-            {{ code }}
-          </div>
-        </details>
+    code {
+      font-family: "JetBrains Mono" !important;
+    }
 
-        <details class="stack card" open>
-          <summary>&nbsp;Stack trace ({{ stack.lines.length }})</summary>
+    pre.shiki,
+    .defaultStyles pre.shiki {
+      border: 1px solid var(--shade-200);
+      border-radius: 0.25rem;
+      background: var(--code-window-background-color) !important;
+      padding: 1.25rem;
+      overflow: scroll;
+      margin: 0;
+    }
 
-          <ol style="counter-reset: countdown {{ stack.lines.length + 1 }}">
-            {{ for line of stack.lines }}
-              <li class="stack-line">
-                <div class="stack-line-container">
-                  <div class="stack-line-content">
-                    {{ if line.method }}
-                      <div class="stack-line-method">{{ line.method }}</div>
-                    {{ /if }}
+    /* Environment Details Component */
+    .environment-details>div {
+      border: 1px solid var(--shade-100);
+      border-radius: 0.25rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
 
-                    {{ line.file }}
-                  </div>
-                  <div class="stack-line-position">
-                    {{ line.line }}:{{ line.col }}
-                  </div>
-                </div>
-              </li>
-            {{ /for }}
-          </ol>
-        </details>
+    .environment-details .request-headers {
+      margin-bottom: 0;
+    }
 
-        <details class="environment-details card" open>
-          <summary>&nbsp;Context</summary>
+    /* Utility Classes */
 
-          <h2>Request</h2>
+    .notice {
+      color: var(--subtle-font-color);
+      font-size: 0.875rem;
+      text-align: center;
+    }
+  </style>
+</head>
 
-          <h3>Details</h3>
+<body>
+  <header class="title container">
+    <h1>
+      {{ if context.response.status }}
+      {{ context.response.status }} -
+      {{ /if }}
+      <em>{{ name }}</em>
+    </h1>
+    <div class="subtitle">
+      {{ message }}
+    </div>
+  </header>
 
-          <div class="request-details">
-            <div class="key-value">
-              <div class="key">URL</div>
-              <div class="value">{{ context.request.url }}</div>
-            </div>
+  <main class="container">
+    {{ if errors?.length }}
+    <details class="errors card" open>
+      <summary>&nbsp;Errors {{ it.errors.length }}</summary>
 
-            <div class="key-value">
-              <div class="key">Method</div>
-              <div class="value">{{ context.request.method }}</div>
-            </div>
-          </div>
-          
-          <h3>Headers</h3>
+      <ul>
+        {{ for error of errors }}
+        {{ for message of error }}
+        <li>{{ message }}</li>
+        {{ /for }}
+        {{ /for }}
+      </ul>
+    </details>
+    {{ /if }}
 
-          <div class="request-headers">        
-            {{ for key, value of context.request.headers }}
-              <div class="key-value">
-                <div class="key">{{ key }}</div>
-                <div class="value">{{ value }}</div>
-              </div>
-            {{ /for }}
-          </div>
-        </details>
+    <details class="code-container card" open>
+      <summary>&nbsp;Originating file</summary>
 
-        <div class="notice">
-          <p>This error has been caught using the @raptor/error extension.</p>
+      <div class="file-details">
+        <div class="path">
+          <em>{{ stack.lines[0].file }}</em>
         </div>
-    </main>
-  </body>
+        <div class="open">
+          <a href="vscode://file/{{ stack.lines[0].file }}" title="Open in code editor">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M14.25 9.75 16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="code-window">
+        {{ code }}
+      </div>
+    </details>
+
+    <details class="stack card" open>
+      <summary>&nbsp;Stack trace ({{ stack.lines.length }})</summary>
+
+      <ol style="counter-reset: countdown {{ stack.lines.length + 1 }}">
+        {{ for line of stack.lines }}
+        <li class="stack-line">
+          <div class="stack-line-container">
+            <div class="stack-line-content">
+              {{ if line.method }}
+              <div class="stack-line-method">{{ line.method }}</div>
+              {{ /if }}
+
+              {{ line.file }}
+            </div>
+            <div class="stack-line-position">
+              {{ line.line }}:{{ line.col }}
+            </div>
+          </div>
+        </li>
+        {{ /for }}
+      </ol>
+    </details>
+
+    <details class="environment-details card" open>
+      <summary>&nbsp;Context</summary>
+
+      <h2>Request</h2>
+
+      <h3>Details</h3>
+
+      <div class="request-details">
+        <div class="key-value">
+          <div class="key">URL</div>
+          <div class="value">{{ context.request.url }}</div>
+        </div>
+
+        <div class="key-value">
+          <div class="key">Method</div>
+          <div class="value">{{ context.request.method }}</div>
+        </div>
+      </div>
+
+      <h3>Headers</h3>
+
+      <div class="request-headers">
+        {{ for key, value of context.request.headers }}
+        <div class="key-value">
+          <div class="key">{{ key }}</div>
+          <div class="value">{{ value }}</div>
+        </div>
+        {{ /for }}
+      </div>
+    </details>
+
+    <div class="notice">
+      <p>This error has been caught using the @raptor/error extension.</p>
+    </div>
+  </main>
+</body>
+
 </html>

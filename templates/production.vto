@@ -1,98 +1,87 @@
 <html>
-  <head>
-    <title>{{ context.response.status }} {{ name }} {{ message ? `- ${message}` : null }}</title>
-    
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-      :root {
-        --primary-shade-100: #fefefe;
-        --primary-shade-200: #fbfbfc;
-        --primary-shade-300: #fafafb;
-        --primary-shade-400: #f3f4f7;
-        --primary-shade-500: #ebecf0;
-        --primary-shade-600: #d2d6de;
-        --primary-shade-700: #9ca6b6;
-        --primary-shade-800: #6d768a;
-        --primary-shade-900: #4f5c6e;
-        --primary-shade-1000: #3e495c;
-        --primary-shade-1100: #283342;
-        --primary-shade-1200: #1a2332;
-        --primary-shade-1300: #0e1522;
+<head>
+  <title>{{ context.response.status }} {{ name }} {{ message ? `- ${message}` : null }}</title>
 
-        --color-accent: #c4b5fd;
-        --color-accent-light: #ddd6fe;
-        --color-accent-dark: #bf95f6;
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Outfit:wght@100..900&family=Recursive:wght@300..1000&display=swap");
 
-        --secondary-color-accent: #86efac;
-        --background-color: #f3f4f7;
-        --dark-background-color: #0e1522;
-        --code-window-background-color: #0e1522;
-        --border-color: #dedede;
-        --font-color: var(--primary-shade-200);
-        --font-family: -apple-system,"system-ui","segoe ui",Helvetica,Arial,sans-serif,"apple color emoji","segoe ui emoji";
-        --subtle-font-color: var(--primary-shade-400);
-        --heading-color: var(--color-white);
-        --heading-font-family: "Jetbrains Mono";
-        
-        --primary-accent-color: var(--color-accent);
-        --secondary-accent-color: var(--secondary-color-accent);
-      }
+    :root {
+      --shade: #101113;
+      --shade-0: #191b1f;
+      --shade-50: #1f2228;
+      --shade-100: #282b33;
+      --shade-200: #33373f;
+      --shade-300: #4a4f5a;
+      --shade-400: #6b7280;
+      --shade-500: #9095a0;
+      --shade-600: #a8adb8;
+      --shade-700: #c5c9d1;
+      --shade-800: #e1e4e8;
+      --shade-900: #f6f8fa;
 
-      * {
-        box-sizing: border-box;
-      }
+      --background-color: var(--shade);
+      --dark-background-color: var(--shade-0);
+      --code-window-background-color: var(--shade);
+      --font-color: var(--shade-900);
+      --font-family: "Inter", -apple-system, "system-ui", Segoe UI, system-ui, sans-serif;
+      --heading-color: var(--shade-900);
+    }
 
-      body {
-        background: var(--dark-background-color);
-        color: var(--font-color);
-        font-size: 16px;
-        font-family: var(--font-family);
-        font-weight: 300;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+    * {
+      box-sizing: border-box;
+    }
 
-      h1, h2, h3, h4 {
-        color: var(--heading-color);
-        font-family: var(--heading-font-family);
-        margin: 0;
-      }
+    body {
+      background: var(--dark-background-color);
+      color: var(--font-color);
+      font-size: 16px;
+      font-family: var(--font-family);
+      font-weight: 300;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-      h1 {
-        font-size: 3rem;
-        margin: 0 0 1rem;
-        color: var(--heading-color);
-      }
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--heading-color);
+      margin: 0;
+    }
 
-      .container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        height: 100%;
-      }
+    h1 {
+      font-size: 3rem;
+      font-weight: 500;
+      margin: 0 0 1rem;
+      color: var(--heading-color);
+    }
 
-      .subtitle {
-        font-size: 1rem;
-        font-weight: 300;
-        margin-bottom: 0;
-      }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+    }
 
-      em {
-        font-style: normal;
-        color: var(--color-primary);
-      }
-    </style>
-  </head>
-  
-  <body>
-    <main class="container">
-      <div>
-        <h1>{{ context.response.status }} - {{ name }}</h1>
-        <div class="subtitle">{{ message }}</div>
-      </div>
-    </main>
-  </body>
+    .subtitle {
+      color: var(--shade-400);
+      font-size: 1rem;
+      font-weight: 300;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <div>
+      <h1>{{ context.response.status }} - <em>{{ name }}</em></h1>
+      <div class="subtitle">{{ message }}</div>
+    </div>
+  </main>
+</body>
+
 </html>
