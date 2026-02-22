@@ -2,22 +2,22 @@
   "version": "5",
   "specifiers": {
     "jsr:@raptor/framework@~0.17.1": "0.17.1",
-    "jsr:@std/assert@^1.0.17": "1.0.18",
-    "jsr:@std/assert@^1.0.18": "1.0.18",
+    "jsr:@std/assert@^1.0.17": "1.0.19",
+    "jsr:@std/assert@^1.0.19": "1.0.19",
     "jsr:@std/data-structures@^1.0.10": "1.0.10",
-    "jsr:@std/fs@^1.0.22": "1.0.22",
+    "jsr:@std/fs@^1.0.22": "1.0.23",
     "jsr:@std/internal@^1.0.12": "1.0.12",
     "jsr:@std/path@^1.1.4": "1.1.4",
     "jsr:@std/testing@^1.0.17": "1.0.17",
     "npm:shiki@^3.22.0": "3.22.0",
-    "npm:ventojs@^2.3.0": "2.3.0"
+    "npm:ventojs@^2.3.1": "2.3.1"
   },
   "jsr": {
     "@raptor/framework@0.17.1": {
       "integrity": "beecd3ed6fda9ecdc57683d29637cb56b861bd979f3d031847c601ab5af13654"
     },
-    "@std/assert@1.0.18": {
-      "integrity": "270245e9c2c13b446286de475131dc688ca9abcd94fc5db41d43a219b34d1c78",
+    "@std/assert@1.0.19": {
+      "integrity": "eaada96ee120cb980bc47e040f82814d786fe8162ecc53c91d8df60b8755991e",
       "dependencies": [
         "jsr:@std/internal"
       ]
@@ -25,8 +25,8 @@
     "@std/data-structures@1.0.10": {
       "integrity": "f574f86b0e07c69b9edc555fcc814b57d29258bad39fd5a34ba8a80ecf033cfe"
     },
-    "@std/fs@1.0.22": {
-      "integrity": "de0f277a58a867147a8a01bc1b181d0dfa80bfddba8c9cf2bacd6747bcec9308",
+    "@std/fs@1.0.23": {
+      "integrity": "3ecbae4ce4fee03b180fa710caff36bb5adb66631c46a6460aaad49515565a37",
       "dependencies": [
         "jsr:@std/path"
       ]
@@ -288,8 +288,8 @@
         "unist-util-visit-parents"
       ]
     },
-    "ventojs@2.3.0": {
-      "integrity": "sha512-Vi/ZdC7QwdaaPTDL6fMWBxj+LnLTynDbef8Mb3YId3AR1Tnds2dS8YRUU/o51/Fv/5rdTNFJL4YHtBpfBbTQKg=="
+    "ventojs@2.3.1": {
+      "integrity": "sha512-saGBMwQF+TZZJLTixSzwbZl+O5cNdBhMXNYAwegQ+/EsXSllSzrzgrZN7MU07ZOea3M+I/xBTwEFVb0HU6moUw=="
     },
     "vfile-message@4.0.3": {
       "integrity": "sha512-QTHzsGd1EhbZs4AsQ20JX1rC3cOlt/IWJruk893DfLRr57lcnOeMaWG4K0JrRta4mIJZKth2Au3mM3u03/JWKw==",
@@ -312,10 +312,10 @@
   "workspace": {
     "dependencies": [
       "jsr:@raptor/framework@~0.17.1",
-      "jsr:@std/assert@^1.0.18",
+      "jsr:@std/assert@^1.0.19",
       "jsr:@std/testing@^1.0.17",
       "npm:shiki@^3.22.0",
-      "npm:ventojs@^2.3.0"
+      "npm:ventojs@^2.3.1"
     ]
   }
 }

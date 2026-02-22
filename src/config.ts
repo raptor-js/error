@@ -1,9 +1,6 @@
 type Environment = "development" | "production";
 
-/**
- * Options which can be used to change error handling functionality.
- */
-export interface ErrorHandlerOptions {
+export interface Config {
   /**
    * Whether the system should render in development or production.
    */

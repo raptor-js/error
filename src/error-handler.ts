@@ -6,20 +6,20 @@ import {
   ServerError,
 } from "@raptor/framework";
 
+import type { Config } from "./config.ts";
 import CodeExtractor from "./code/extractor.ts";
 import CodeHighlighter from "./code/highlighter.ts";
 import TemplateRenderer from "./template/renderer.ts";
 import StackProcessor, { type StackTraceItem } from "./stack/processor.ts";
-import type { ErrorHandlerOptions } from "./interfaces/error-handler-options.ts";
 
 /**
  * The error handler middleware.
  */
 export default class Handler {
   /**
-   * The environment on which to handle errors.
+   * Optional configuration for the handler.
    */
-  private options: ErrorHandlerOptions;
+  private config?: Config;
 
   /**
    * The code snippet extractor.
@@ -41,12 +41,12 @@ export default class Handler {
    */
   private stackProcessor: StackProcessor;
 
-  constructor(options?: ErrorHandlerOptions) {
+  constructor(config?: Config) {
     this.codeExtractor = new CodeExtractor();
     this.stackProcessor = new StackProcessor();
     this.templateRenderer = new TemplateRenderer();
     this.codeHighlighter = new CodeHighlighter();
-    this.options = options ?? this.initialiseDefaultOptions();
+    this.config = config ?? this.initialiseDefaultConfig();
   }
 
   /**
@@ -168,7 +168,7 @@ export default class Handler {
     );
 
     const templatePath = new URL(
-      `../templates/${this.options.env}.vto`,
+      `../templates/${this.config?.env}.vto`,
       import.meta.url,
     );
 
@@ -226,12 +226,12 @@ export default class Handler {
    * @param options Optional error handler options object.
    * @returns A new error handler options object with defaults.
    */
-  private initialiseDefaultOptions(
-    options?: ErrorHandlerOptions,
-  ): ErrorHandlerOptions {
+  private initialiseDefaultConfig(
+    config?: Config,
+  ): Config {
     return {
       env: "production",
-      ...options,
+      ...config,
     };
   }
 }
