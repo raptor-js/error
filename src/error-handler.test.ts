@@ -186,14 +186,14 @@ Deno.test("error handler creates correct structure", () => {
 Deno.test("error handler sets production env", () => {
   const handler = new ErrorHandler();
 
-  const options = handler["initialiseDefaultOptions"]();
+  const options = handler["initialiseDefaultConfig"]();
 
   assertEquals(options.env, "production");
 });
 
 Deno.test("error handler merges custom options", () => {
   const handler = new ErrorHandler();
-  const options = handler["initialiseDefaultOptions"]({ env: "development" });
+  const options = handler["initialiseDefaultConfig"]({ env: "development" });
 
   assertEquals(options.env, "development");
 });
