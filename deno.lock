@@ -1,7 +1,7 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@raptor/framework@0.18": "0.18.0",
+    "jsr:@raptor/framework@0.19": "0.19.0",
     "jsr:@std/assert@^1.0.17": "1.0.19",
     "jsr:@std/assert@^1.0.19": "1.0.19",
     "jsr:@std/data-structures@^1.0.10": "1.0.10",
@@ -9,12 +9,12 @@
     "jsr:@std/internal@^1.0.12": "1.0.12",
     "jsr:@std/path@^1.1.4": "1.1.4",
     "jsr:@std/testing@^1.0.17": "1.0.17",
-    "npm:shiki@^3.22.0": "3.22.0",
+    "npm:shiki@4": "4.0.0",
     "npm:ventojs@^2.3.1": "2.3.1"
   },
   "jsr": {
-    "@raptor/framework@0.18.0": {
-      "integrity": "7fb023b6d327b71ab0a8c4d7f4b2c6ab0baa6b8c81f3680877c10020af041443"
+    "@raptor/framework@0.19.0": {
+      "integrity": "deb50d379d91f66c3ed9d202f1050c3628500b1017f825a1b973b1b24d95647c"
     },
     "@std/assert@1.0.19": {
       "integrity": "eaada96ee120cb980bc47e040f82814d786fe8162ecc53c91d8df60b8755991e",
@@ -52,44 +52,53 @@
     }
   },
   "npm": {
-    "@shikijs/core@3.22.0": {
-      "integrity": "sha512-iAlTtSDDbJiRpvgL5ugKEATDtHdUVkqgHDm/gbD2ZS9c88mx7G1zSYjjOxp5Qa0eaW0MAQosFRmJSk354PRoQA==",
+    "@shikijs/core@4.0.0": {
+      "integrity": "sha512-tvV94Dwyz4qFZ8R0MUaFx5Yptgy8yrloa4dwynEJDGjKz+8vqO8Q6FmPZL9W1gSzFHOUMOGQzIHK62aGourFxA==",
       "dependencies": [
+        "@shikijs/primitive",
         "@shikijs/types",
         "@shikijs/vscode-textmate",
         "@types/hast",
         "hast-util-to-html"
       ]
     },
-    "@shikijs/engine-javascript@3.22.0": {
-      "integrity": "sha512-jdKhfgW9CRtj3Tor0L7+yPwdG3CgP7W+ZEqSsojrMzCjD1e0IxIbwUMDDpYlVBlC08TACg4puwFGkZfLS+56Tw==",
+    "@shikijs/engine-javascript@4.0.0": {
+      "integrity": "sha512-+PEyTS+JTz2lLy2C1Dwwx6hzoehIzqxQYh5MEjv9V4JtSabx+bIkRHfQT+6DnBmPAplGH0exBknWeiJSXC7w1w==",
       "dependencies": [
         "@shikijs/types",
         "@shikijs/vscode-textmate",
         "oniguruma-to-es"
       ]
     },
-    "@shikijs/engine-oniguruma@3.22.0": {
-      "integrity": "sha512-DyXsOG0vGtNtl7ygvabHd7Mt5EY8gCNqR9Y7Lpbbd/PbJvgWrqaKzH1JW6H6qFkuUa8aCxoiYVv8/YfFljiQxA==",
+    "@shikijs/engine-oniguruma@4.0.0": {
+      "integrity": "sha512-KXmq4b6Xw16+4+rz5M4NZMoe/tzs5kTOMSJz8+LCyxSrwmxwTBAM/ab85iSO2Gw79E47HkW4B9HPHUXhrNOivw==",
       "dependencies": [
         "@shikijs/types",
         "@shikijs/vscode-textmate"
       ]
     },
-    "@shikijs/langs@3.22.0": {
-      "integrity": "sha512-x/42TfhWmp6H00T6uwVrdTJGKgNdFbrEdhaDwSR5fd5zhQ1Q46bHq9EO61SCEWJR0HY7z2HNDMaBZp8JRmKiIA==",
+    "@shikijs/langs@4.0.0": {
+      "integrity": "sha512-dSAT6fBcnOcYZQMWZO8+OmzUKKm+OO0As/qZ3TXLiSy0JsCTEYz1TaX7TDupnYLz7dr0oF2DOTEgPocx1D3aFw==",
       "dependencies": [
         "@shikijs/types"
       ]
     },
-    "@shikijs/themes@3.22.0": {
-      "integrity": "sha512-o+tlOKqsr6FE4+mYJG08tfCFDS+3CG20HbldXeVoyP+cYSUxDhrFf3GPjE60U55iOkkjbpY2uC3It/eeja35/g==",
+    "@shikijs/primitive@4.0.0": {
+      "integrity": "sha512-6K2zD7JTgsyFc2vM1rqy8eRGC8D5Hius3qzVONjq2lHMrqfTSn1HcGeJZiFPYSV9m3DQuBHncBbA5xe0hKSOkQ==",
+      "dependencies": [
+        "@shikijs/types",
+        "@shikijs/vscode-textmate",
+        "@types/hast"
+      ]
+    },
+    "@shikijs/themes@4.0.0": {
+      "integrity": "sha512-xe42kvxOXan5ouXxULez6qwDNUJkoP6kicfg0wKuJBkeIaHLxZBZa2gEGYutL1q27DQZ5+XoR6caVX+E/aNR5A==",
       "dependencies": [
         "@shikijs/types"
       ]
     },
-    "@shikijs/types@3.22.0": {
-      "integrity": "sha512-491iAekgKDBFE67z70Ok5a8KBMsQ2IJwOWw3us/7ffQkIBCyOQfm/aNwVMBUriP02QshIfgHCBSIYAl3u2eWjg==",
+    "@shikijs/types@4.0.0": {
+      "integrity": "sha512-LCnfBTtQKNtJyc1qMShZr2dJt1uxNI6pI0/YTc2DSNET91aUvnMGHUHsucVCC5AJVcv5XyBqk2NgYRwd20EjbA==",
       "dependencies": [
         "@shikijs/vscode-textmate",
         "@types/hast"
@@ -229,8 +238,8 @@
         "regex-utilities"
       ]
     },
-    "shiki@3.22.0": {
-      "integrity": "sha512-LBnhsoYEe0Eou4e1VgJACes+O6S6QC0w71fCSp5Oya79inkwkm15gQ1UF6VtQ8j/taMDh79hAB49WUk8ALQW3g==",
+    "shiki@4.0.0": {
+      "integrity": "sha512-rjKoiw30ZaFsM0xnPPwxco/Jftz/XXqZkcQZBTX4LGheDw8gCDEH87jdgaKDEG3FZO2bFOK27+sR/sDHhbBXfg==",
       "dependencies": [
         "@shikijs/core",
         "@shikijs/engine-javascript",
@@ -311,10 +320,10 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@raptor/framework@0.18",
+      "jsr:@raptor/framework@0.19",
       "jsr:@std/assert@^1.0.19",
       "jsr:@std/testing@^1.0.17",
-      "npm:shiki@^3.22.0",
+      "npm:shiki@4",
       "npm:ventojs@^2.3.1"
     ]
   }
