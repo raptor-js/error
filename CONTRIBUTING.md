@@ -2,9 +2,8 @@
 
 Thank you for your interest in contributing to the Raptor ecosystem!
 
-This package is part of the
-[Raptor](https://github.com/raptor-js) project. Please see
-the main framework
+This package is part of the [Raptor](https://github.com/raptor-js) project.
+Please see the main framework
 [contributing documentation](https://github.com/raptor-js/kernel/blob/main/CONTRIBUTING.md)
 for guidelines on:
 

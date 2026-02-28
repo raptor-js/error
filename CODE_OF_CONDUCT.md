@@ -1,7 +1,6 @@
 # Code of Conduct
 
-This package is part of the
-[Raptor](https://github.com/raptor-js) project.
+This package is part of the [Raptor](https://github.com/raptor-js) project.
 
 Please refer to the main framework
 [Code of Conduct](https://github.com/raptor-js/kernel/blob/main/CODE_OF_CONDUCT.md)
