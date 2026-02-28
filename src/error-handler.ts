@@ -4,7 +4,7 @@ import {
   type ErrorHandler,
   type HttpError as RaptorError,
   ServerError,
-} from "@raptor/framework";
+} from "@raptor/kernel";
 
 import type { Config } from "./config.ts";
 import CodeExtractor from "./code/extractor.ts";

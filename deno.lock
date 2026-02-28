@@ -1,9 +1,10 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@raptor/framework@0.19": "0.19.0",
+    "jsr:@raptor/kernel@0.19": "0.19.0",
     "jsr:@std/assert@^1.0.17": "1.0.19",
     "jsr:@std/assert@^1.0.19": "1.0.19",
+    "jsr:@std/async@^1.1.0": "1.2.0",
     "jsr:@std/data-structures@^1.0.10": "1.0.10",
     "jsr:@std/fs@^1.0.22": "1.0.23",
     "jsr:@std/internal@^1.0.12": "1.0.12",
@@ -13,14 +14,17 @@
     "npm:ventojs@^2.3.1": "2.3.1"
   },
   "jsr": {
-    "@raptor/framework@0.19.0": {
-      "integrity": "deb50d379d91f66c3ed9d202f1050c3628500b1017f825a1b973b1b24d95647c"
+    "@raptor/kernel@0.19.0": {
+      "integrity": "e5275b97393e2680bcda96d4f140920ed0253184cffc12883a4b9680363cfb32"
     },
     "@std/assert@1.0.19": {
       "integrity": "eaada96ee120cb980bc47e040f82814d786fe8162ecc53c91d8df60b8755991e",
       "dependencies": [
         "jsr:@std/internal"
       ]
+    },
+    "@std/async@1.2.0": {
+      "integrity": "c059c6f6d95ca7cc012ae8e8d7164d1697113d54b0b679e4372b354b11c2dee5"
     },
     "@std/data-structures@1.0.10": {
       "integrity": "f574f86b0e07c69b9edc555fcc814b57d29258bad39fd5a34ba8a80ecf033cfe"
@@ -44,6 +48,7 @@
       "integrity": "87bdc2700fa98249d48a17cd72413352d3d3680dcfbdb64947fd0982d6bbf681",
       "dependencies": [
         "jsr:@std/assert@^1.0.17",
+        "jsr:@std/async",
         "jsr:@std/data-structures",
         "jsr:@std/fs",
         "jsr:@std/internal",
@@ -320,7 +325,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@raptor/framework@0.19",
+      "jsr:@raptor/kernel@0.19",
       "jsr:@std/assert@^1.0.19",
       "jsr:@std/testing@^1.0.17",
       "npm:shiki@4",

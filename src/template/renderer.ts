@@ -1,5 +1,5 @@
 import vento from "ventojs";
-import { ServerError } from "@raptor/framework";
+import { ServerError } from "@raptor/kernel";
 import FileSystem from "../filesystem/manager.ts";
 import type { Environment, TemplateResult } from "ventojs/core/environment.js";
 

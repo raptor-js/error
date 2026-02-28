@@ -1,4 +1,4 @@
-import { ServerError } from "@raptor/framework";
+import { ServerError } from "@raptor/kernel";
 
 import type { FileSystemAdapter } from "../../interfaces/file-system-adapter.ts";
 

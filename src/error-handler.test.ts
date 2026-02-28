@@ -2,7 +2,7 @@
 // deno-lint-ignore-file
 
 import { assertEquals, assertRejects } from "@std/assert";
-import { type Context, ServerError } from "@raptor/framework";
+import { type Context, ServerError } from "@raptor/kernel";
 
 import ErrorHandler from "./error-handler.ts";
 

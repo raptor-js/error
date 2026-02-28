@@ -2,7 +2,7 @@
 // deno-lint-ignore-file
 
 import { stub } from "@std/testing/mock";
-import { ServerError } from "@raptor/framework";
+import { ServerError } from "@raptor/kernel";
 import { assertEquals, assertExists, assertRejects } from "@std/assert";
 
 import TemplateRenderer from "./renderer.ts";
