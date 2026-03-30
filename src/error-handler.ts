@@ -1,10 +1,10 @@
-import {
-  ContentNegotiator,
-  type Context,
-  type ErrorHandler,
-  type HttpError as RaptorError,
-  ServerError,
-} from "@raptor/kernel";
+import { ContentNegotiator, ServerError } from "@raptor/kernel";
+
+import type {
+  Context,
+  ErrorHandler,
+  HttpError as RaptorError,
+} from "@raptor/types";
 
 import type { Config } from "./config.ts";
 import CodeExtractor from "./code/extractor.ts";

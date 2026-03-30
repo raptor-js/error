@@ -2,6 +2,7 @@
   "version": "5",
   "specifiers": {
     "jsr:@raptor/kernel@0.20": "0.20.0",
+    "jsr:@raptor/types@~0.1.1": "0.1.1",
     "jsr:@std/assert@^1.0.17": "1.0.19",
     "jsr:@std/assert@^1.0.19": "1.0.19",
     "jsr:@std/async@^1.1.0": "1.2.0",
@@ -16,6 +17,9 @@
   "jsr": {
     "@raptor/kernel@0.20.0": {
       "integrity": "f8f9945f2d0529c76bc4a5527d94af9c92e4f87f9b761956912ad61f5a608903"
+    },
+    "@raptor/types@0.1.1": {
+      "integrity": "8a6089e859141415b45ceddbd2055e02faac74f63e1d2f630d5f9ca4089df350"
     },
     "@std/assert@1.0.19": {
       "integrity": "eaada96ee120cb980bc47e040f82814d786fe8162ecc53c91d8df60b8755991e",
@@ -326,6 +330,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@raptor/kernel@0.20",
+      "jsr:@raptor/types@~0.1.1",
       "jsr:@std/assert@^1.0.19",
       "jsr:@std/testing@^1.0.17",
       "npm:shiki@^4.0.1",

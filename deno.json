@@ -1,10 +1,13 @@
 {
   "name": "@raptor/error",
-  "version": "0.13.1",
+  "version": "0.14.0",
   "exports": "./mod.ts",
   "nodeModulesDir": "auto",
   "compilerOptions": {
-    "lib": ["deno.ns", "deno.window"]
+    "lib": [
+      "deno.ns",
+      "deno.window"
+    ]
   },
   "publish": {
     "exclude": [
@@ -26,6 +29,7 @@
   "lock": true,
   "imports": {
     "@raptor/kernel": "jsr:@raptor/kernel@^0.20.0",
+    "@raptor/types": "jsr:@raptor/types@^0.1.1",
     "shiki": "npm:shiki@^4.0.1",
     "ventojs": "npm:ventojs@^2.3.1",
     "@std/assert": "jsr:@std/assert@^1.0.19",
