@@ -14,7 +14,7 @@ export default class Bun implements FileSystemAdapter {
       // biome-ignore lint/suspicious/noExplicitAny: the runtime global has no types here
       const Bun = (globalThis as any).Bun;
 
-      if (Bun === "undefined") {
+      if (typeof Bun === "undefined") {
         throw new ServerError();
       }
 
@@ -41,7 +41,7 @@ export default class Bun implements FileSystemAdapter {
       // biome-ignore lint/suspicious/noExplicitAny: the runtime global has no types here
       const Bun = (globalThis as any).Bun;
 
-      if (Bun === "undefined") {
+      if (typeof Bun === "undefined") {
         throw new ServerError();
       }
 

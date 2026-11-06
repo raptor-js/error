@@ -14,7 +14,7 @@ export default class Deno implements FileSystemAdapter {
       // biome-ignore lint/suspicious/noExplicitAny: the runtime global has no types here
       const Deno = (globalThis as any).Deno;
 
-      if (Deno === "undefined") {
+      if (typeof Deno === "undefined") {
         throw new ServerError();
       }
 
@@ -39,7 +39,7 @@ export default class Deno implements FileSystemAdapter {
       // biome-ignore lint/suspicious/noExplicitAny: the runtime global has no types here
       const Deno = (globalThis as any).Deno;
 
-      if (Deno === "undefined") {
+      if (typeof Deno === "undefined") {
         throw new ServerError();
       }
 

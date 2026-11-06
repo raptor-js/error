@@ -1,6 +1,6 @@
 {
   "name": "@raptor-js/error",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "description": "Error handling middleware for the Raptor framework, with development and production error pages.",
   "license": "MIT",
   "homepage": "https://raptorjs.com",
