@@ -4,5 +4,5 @@ contact_links:
     url: https://www.npmjs.com/package/@raptor-js/error
     about: View the package on npm
   - name: Security Issue
-    url: https://github.com/raptor-http/error/security/advisories/new
+    url: https://github.com/raptor-js/error/security/advisories/new
     about: Report a security vulnerability privately
