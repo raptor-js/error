@@ -1,6 +1,6 @@
 {
   "name": "@raptor-js/error",
-  "version": "0.17.1",
+  "version": "0.18.0",
   "description": "Error handling middleware for the Raptor framework, with development and production error pages.",
   "license": "MIT",
   "homepage": "https://raptorjs.com",
@@ -30,12 +30,15 @@
     "prepack": "npm run build"
   },
   "dependencies": {
-    "@raptor-js/kernel": "^0.28.0",
     "@raptor-js/types": "^0.4.0",
     "shiki": "^4.6.0"
   },
+  "peerDependencies": {
+    "@raptor-js/kernel": ">=0.28.0 <1.0.0"
+  },
   "devDependencies": {
     "@biomejs/biome": "^2.6.6",
+    "@raptor-js/kernel": "^0.29.0",
     "@types/node": "^26.6.6",
     "typescript": "^7.0.2"
   }
