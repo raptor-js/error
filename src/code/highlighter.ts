@@ -21,10 +21,7 @@ export default class CodeHighlighter {
       throw new Error("Cannot highlight empty snippet");
     }
 
-    if (
-      decorationLine < 0 ||
-      decorationLine >= snippetLines.length
-    ) {
+    if (decorationLine < 0 || decorationLine >= snippetLines.length) {
       throw new Error(
         `Decoration line is out of bounds: ${decorationLine} (snippet has ${snippetLines.length} lines)`,
       );

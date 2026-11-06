@@ -1,10 +1,10 @@
-import { ContentNegotiator, ServerError } from "@raptor/kernel";
+import { ContentNegotiator, ServerError } from "@raptor-js/kernel";
 
 import type {
   Context,
   ErrorHandler,
   HttpError as RaptorError,
-} from "@raptor/types";
+} from "@raptor-js/types";
 
 import type { Config } from "./config.ts";
 import CodeExtractor from "./code/extractor.ts";
@@ -216,9 +216,7 @@ export default class Handler {
    * @param options Optional error handler options object.
    * @returns A new error handler options object with defaults.
    */
-  private initialiseDefaultConfig(
-    config?: Config,
-  ): Config {
+  private initialiseDefaultConfig(config?: Config): Config {
     return {
       env: "production",
       ...config,

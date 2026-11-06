@@ -1,42 +1,40 @@
-/// <reference lib="deno.ns" />
-// deno-lint-ignore-file
-
-import { assertEquals, assertExists } from "@std/assert";
+import assert from "node:assert/strict";
+import { test } from "node:test";
 
 import StackProcessor from "./processor.ts";
 
-Deno.test("stack processor creates instance", () => {
+test("stack processor creates instance", () => {
   const processor = new StackProcessor();
 
-  assertExists(processor);
+  assert.ok(processor != null);
 });
 
-Deno.test("stack processor stores stack string", () => {
+test("stack processor stores stack string", () => {
   const processor = new StackProcessor();
   const stack = "Error: Test error\n    at test.ts:1:1";
 
   processor.addStackData(stack);
 
-  assertExists(processor);
+  assert.ok(processor != null);
 });
 
-Deno.test("stack processor returns empty array for no stack", () => {
+test("stack processor returns empty array for no stack", () => {
   const processor = new StackProcessor();
 
   const result = processor.process();
 
-  assertEquals(result, []);
+  assert.deepStrictEqual(result, []);
 });
 
-Deno.test("stack processor returns empty array for undefined stack", () => {
+test("stack processor returns empty array for undefined stack", () => {
   const processor = new StackProcessor();
 
   const result = processor.extractStackLines();
 
-  assertEquals(result, []);
+  assert.deepStrictEqual(result, []);
 });
 
-Deno.test("stack processor parses stack with method names", () => {
+test("stack processor parses stack with method names", () => {
   const processor = new StackProcessor();
 
   const stack = `Error: Test error
@@ -47,18 +45,18 @@ Deno.test("stack processor parses stack with method names", () => {
 
   const result = processor.extractStackLines();
 
-  assertEquals(result.length, 2);
-  assertEquals(result[0].method, "myFunction");
-  assertEquals(result[0].file, "/path/to/file.ts");
-  assertEquals(result[0].line, 10);
-  assertEquals(result[0].col, 5);
-  assertEquals(result[1].method, "anotherFunction");
-  assertEquals(result[1].file, "/path/to/other.ts");
-  assertEquals(result[1].line, 20);
-  assertEquals(result[1].col, 10);
+  assert.deepStrictEqual(result.length, 2);
+  assert.deepStrictEqual(result[0].method, "myFunction");
+  assert.deepStrictEqual(result[0].file, "/path/to/file.ts");
+  assert.deepStrictEqual(result[0].line, 10);
+  assert.deepStrictEqual(result[0].col, 5);
+  assert.deepStrictEqual(result[1].method, "anotherFunction");
+  assert.deepStrictEqual(result[1].file, "/path/to/other.ts");
+  assert.deepStrictEqual(result[1].line, 20);
+  assert.deepStrictEqual(result[1].col, 10);
 });
 
-Deno.test("stack processor parses stack without method names", () => {
+test("stack processor parses stack without method names", () => {
   const processor = new StackProcessor();
 
   const stack = `Error: Test error
@@ -69,18 +67,18 @@ Deno.test("stack processor parses stack without method names", () => {
 
   const result = processor.extractStackLines();
 
-  assertEquals(result.length, 2);
-  assertEquals(result[0].method, null);
-  assertEquals(result[0].file, "/path/to/file.ts");
-  assertEquals(result[0].line, 10);
-  assertEquals(result[0].col, 5);
-  assertEquals(result[1].method, null);
-  assertEquals(result[1].file, "/path/to/other.ts");
-  assertEquals(result[1].line, 20);
-  assertEquals(result[1].col, 10);
+  assert.deepStrictEqual(result.length, 2);
+  assert.deepStrictEqual(result[0].method, null);
+  assert.deepStrictEqual(result[0].file, "/path/to/file.ts");
+  assert.deepStrictEqual(result[0].line, 10);
+  assert.deepStrictEqual(result[0].col, 5);
+  assert.deepStrictEqual(result[1].method, null);
+  assert.deepStrictEqual(result[1].file, "/path/to/other.ts");
+  assert.deepStrictEqual(result[1].line, 20);
+  assert.deepStrictEqual(result[1].col, 10);
 });
 
-Deno.test("stack processor removes file:// protocol", () => {
+test("stack processor removes file:// protocol", () => {
   const processor = new StackProcessor();
 
   const stack = `Error: Test error
@@ -90,11 +88,11 @@ Deno.test("stack processor removes file:// protocol", () => {
 
   const result = processor.extractStackLines();
 
-  assertEquals(result.length, 1);
-  assertEquals(result[0].file, "/path/to/file.ts");
+  assert.deepStrictEqual(result.length, 1);
+  assert.deepStrictEqual(result[0].file, "/path/to/file.ts");
 });
 
-Deno.test("stack processor removes async prefix from method names", () => {
+test("stack processor removes async prefix from method names", () => {
   const processor = new StackProcessor();
 
   const stack = `Error: Test error
@@ -104,11 +102,11 @@ Deno.test("stack processor removes async prefix from method names", () => {
 
   const result = processor.extractStackLines();
 
-  assertEquals(result.length, 1);
-  assertEquals(result[0].method, "myAsyncFunction");
+  assert.deepStrictEqual(result.length, 1);
+  assert.deepStrictEqual(result[0].method, "myAsyncFunction");
 });
 
-Deno.test("stack processor handles mixed stack trace formats", () => {
+test("stack processor handles mixed stack trace formats", () => {
   const processor = new StackProcessor();
 
   const stack = `Error: Test error
@@ -120,16 +118,16 @@ Deno.test("stack processor handles mixed stack trace formats", () => {
 
   const result = processor.extractStackLines();
 
-  assertEquals(result.length, 3);
-  assertEquals(result[0].method, "functionA");
-  assertEquals(result[0].file, "/path/to/file1.ts");
-  assertEquals(result[1].method, null);
-  assertEquals(result[1].file, "/path/to/file2.ts");
-  assertEquals(result[2].method, "functionB");
-  assertEquals(result[2].file, "/path/to/file3.ts");
+  assert.deepStrictEqual(result.length, 3);
+  assert.deepStrictEqual(result[0].method, "functionA");
+  assert.deepStrictEqual(result[0].file, "/path/to/file1.ts");
+  assert.deepStrictEqual(result[1].method, null);
+  assert.deepStrictEqual(result[1].file, "/path/to/file2.ts");
+  assert.deepStrictEqual(result[2].method, "functionB");
+  assert.deepStrictEqual(result[2].file, "/path/to/file3.ts");
 });
 
-Deno.test("stack processor ignores non-matching lines", () => {
+test("stack processor ignores non-matching lines", () => {
   const processor = new StackProcessor();
 
   const stack = `Error: Test error
@@ -141,12 +139,12 @@ Deno.test("stack processor ignores non-matching lines", () => {
 
   const result = processor.extractStackLines();
 
-  assertEquals(result.length, 2);
-  assertEquals(result[0].method, "myFunction");
-  assertEquals(result[1].method, "anotherFunction");
+  assert.deepStrictEqual(result.length, 2);
+  assert.deepStrictEqual(result[0].method, "myFunction");
+  assert.deepStrictEqual(result[1].method, "anotherFunction");
 });
 
-Deno.test("stack processor parses line and column numbers correctly", () => {
+test("stack processor parses line and column numbers correctly", () => {
   const processor = new StackProcessor();
 
   const stack = `Error: Test error
@@ -156,12 +154,12 @@ Deno.test("stack processor parses line and column numbers correctly", () => {
 
   const result = processor.extractStackLines();
 
-  assertEquals(result.length, 1);
-  assertEquals(result[0].line, 123);
-  assertEquals(result[0].col, 456);
+  assert.deepStrictEqual(result.length, 1);
+  assert.deepStrictEqual(result[0].line, 123);
+  assert.deepStrictEqual(result[0].col, 456);
 });
 
-Deno.test("stack processor handles URLs in file paths", () => {
+test("stack processor handles URLs in file paths", () => {
   const processor = new StackProcessor();
 
   const stack = `Error: Test error
@@ -171,11 +169,11 @@ Deno.test("stack processor handles URLs in file paths", () => {
 
   const result = processor.extractStackLines();
 
-  assertEquals(result.length, 1);
-  assertEquals(result[0].file, "https://example.com/file.ts");
+  assert.deepStrictEqual(result.length, 1);
+  assert.deepStrictEqual(result[0].file, "https://example.com/file.ts");
 });
 
-Deno.test("stack processor returns same as extractStackLines", () => {
+test("stack processor returns same as extractStackLines", () => {
   const processor = new StackProcessor();
 
   const stack = `Error: Test error
@@ -189,7 +187,7 @@ Deno.test("stack processor returns same as extractStackLines", () => {
 
   const result2 = processor.extractStackLines();
 
-  assertEquals(result1.length, result2.length);
-  assertEquals(result1[0].method, result2[0].method);
-  assertEquals(result1[0].file, result2[0].file);
+  assert.deepStrictEqual(result1.length, result2.length);
+  assert.deepStrictEqual(result1[0].method, result2[0].method);
+  assert.deepStrictEqual(result1[0].file, result2[0].file);
 });

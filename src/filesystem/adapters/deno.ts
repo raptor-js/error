@@ -1,4 +1,4 @@
-import { ServerError } from "@raptor/kernel";
+import { ServerError } from "@raptor-js/kernel";
 
 import type { FileSystemAdapter } from "../../interfaces/file-system-adapter.ts";
 
@@ -11,7 +11,7 @@ export default class Deno implements FileSystemAdapter {
    */
   public readFileSync(path: string | URL): Uint8Array<ArrayBuffer> {
     try {
-      // deno-lint-ignore no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: the runtime global has no types here
       const Deno = (globalThis as any).Deno;
 
       if (Deno === "undefined") {
@@ -36,7 +36,7 @@ export default class Deno implements FileSystemAdapter {
    */
   public readTextFile(path: string | URL): string | Promise<string> {
     try {
-      // deno-lint-ignore no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: the runtime global has no types here
       const Deno = (globalThis as any).Deno;
 
       if (Deno === "undefined") {

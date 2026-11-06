@@ -1,4 +1,4 @@
-import type { ErrorHandler } from "@raptor/types";
+import type { ErrorHandler } from "@raptor-js/types";
 
 import Handler from "./error-handler.ts";
 import type { Config } from "./config.ts";

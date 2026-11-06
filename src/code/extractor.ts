@@ -11,6 +11,11 @@ interface Snippet {
  */
 export default class CodeExtractor {
   /**
+   * The code line offset.
+   */
+  private codeLineOffset: number;
+
+  /**
    * The filesystem manager.
    */
   private fileSystem: FileSystem;
@@ -20,7 +25,8 @@ export default class CodeExtractor {
    *
    * @param codeLineOffset The code line offset.
    */
-  constructor(private codeLineOffset: number = 10) {
+  constructor(codeLineOffset: number = 10) {
+    this.codeLineOffset = codeLineOffset;
     this.fileSystem = new FileSystem();
   }
 
@@ -55,8 +61,8 @@ export default class CodeExtractor {
   private loadFileContent(
     filePath: string,
   ): string | null | Promise<string | null> {
-    const isRemote = filePath.startsWith("http://") ||
-      filePath.startsWith("https://");
+    const isRemote =
+      filePath.startsWith("http://") || filePath.startsWith("https://");
 
     if (isRemote) {
       return this.fetchRemoteFile(filePath);
@@ -108,10 +114,7 @@ export default class CodeExtractor {
    */
   private isValidHighlightLine(line: number, totalLines: number): boolean {
     return (
-      typeof line === "number" &&
-      !isNaN(line) &&
-      line > 0 &&
-      line <= totalLines
+      typeof line === "number" && !isNaN(line) && line > 0 && line <= totalLines
     );
   }
 

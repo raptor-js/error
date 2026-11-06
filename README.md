@@ -4,9 +4,7 @@
 
 <p align="center">
   <a href="https://github.com/raptor-js/error/actions"><img src="https://github.com/raptor-js/error/workflows/ci/badge.svg" alt="Build Status"></a>
-  <a href="jsr.io/@raptor/error"><img src="https://jsr.io/badges/@raptor/error" /></a>
-  <a href="jsr.io/@raptor/error score"><img src="https://jsr.io/badges/@raptor/error/score" /></a>
-  <a href="https://jsr.io/@raptor"><img src="https://jsr.io/badges/@raptor" alt="" /></a>
+  <a href="https://www.npmjs.com/package/@raptor-js/error"><img src="https://img.shields.io/npm/v/@raptor-js/error" alt="npm version" /></a>
 </p>
 
 ## Raptor Error

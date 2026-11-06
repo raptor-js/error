@@ -45,10 +45,10 @@ const stackLine = (line: StackTraceItem): string =>
           <div class="stack-line-container">
             <div class="stack-line-content">
               ${
-    line.method
-      ? `<div class="stack-line-method">${escape(line.method)}</div>`
-      : ""
-  }
+                line.method
+                  ? `<div class="stack-line-method">${escape(line.method)}</div>`
+                  : ""
+              }
 
               ${escape(line.file)}
             </div>
@@ -398,16 +398,16 @@ export default (page: DevelopmentPage): string => {
 
   <main class="container">
     ${
-    errors.length
-      ? `<details class="errors card" open>
+      errors.length
+        ? `<details class="errors card" open>
       <summary>&nbsp;Errors ${errors.length}</summary>
 
       <ul>
         ${errors.map((error) => `<li>${escape(error)}</li>`).join("\n        ")}
       </ul>
     </details>`
-      : ""
-  }
+        : ""
+    }
 
     <details class="code-container card" open>
       <summary>&nbsp;Originating file</summary>
@@ -462,19 +462,20 @@ export default (page: DevelopmentPage): string => {
       <h3>Headers</h3>
 
       <div class="request-headers">
-        ${
-    Object.entries(request.headers).map(([key, value]) =>
-      `<div class="key-value">
+        ${Object.entries(request.headers)
+          .map(
+            ([key, value]) =>
+              `<div class="key-value">
           <div class="key">${escape(key)}</div>
           <div class="value">${escape(value)}</div>
-        </div>`
-    ).join("\n        ")
-  }
+        </div>`,
+          )
+          .join("\n        ")}
       </div>
     </details>
 
     <div class="notice">
-      <p>This error has been caught using the @raptor/error extension.</p>
+      <p>This error has been caught using the @raptor-js/error extension.</p>
     </div>
   </main>
 </body>

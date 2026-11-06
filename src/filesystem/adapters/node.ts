@@ -1,4 +1,4 @@
-import { ServerError } from "@raptor/kernel";
+import { ServerError } from "@raptor-js/kernel";
 import { readFileSync as fsReadFileSync } from "node:fs";
 
 import type { FileSystemAdapter } from "../../interfaces/file-system-adapter.ts";
