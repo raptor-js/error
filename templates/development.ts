@@ -1,14 +1,86 @@
-<!DOCTYPE html>
+import escape from "../src/template/escape.ts";
+import type { StackTraceItem } from "../src/stack/processor.ts";
+
+/**
+ * What the development page shows about an error and where it came from.
+ */
+export interface DevelopmentPage {
+  status: number;
+  name: string;
+  message: string;
+  /** Validation messages, by field or as a list. */
+  errors?: unknown;
+  /** The failing source, already highlighted as HTML. */
+  code: string;
+  stack: StackTraceItem[];
+  request: {
+    url: string;
+    method: string;
+    headers: Record<string, string>;
+  };
+}
+
+/**
+ * Every validation message, whether grouped by field or listed.
+ *
+ * @param errors The errors attached to the error.
+ * @returns The messages, flattened.
+ */
+const messagesOf = (errors: unknown): unknown[] => {
+  if (!errors || typeof errors !== "object") {
+    return [];
+  }
+
+  return Object.values(errors).flat();
+};
+
+/**
+ * One line of the stack trace.
+ *
+ * @param line The line to show.
+ * @returns The line as HTML.
+ */
+const stackLine = (line: StackTraceItem): string =>
+  `<li class="stack-line">
+          <div class="stack-line-container">
+            <div class="stack-line-content">
+              ${
+    line.method
+      ? `<div class="stack-line-method">${escape(line.method)}</div>`
+      : ""
+  }
+
+              ${escape(line.file)}
+            </div>
+            <div class="stack-line-position">
+              ${line.line}:${line.col}
+            </div>
+          </div>
+        </li>`;
+
+/**
+ * The development error page.
+ *
+ * @param page What to show.
+ * @returns The page as HTML.
+ */
+export default (page: DevelopmentPage): string => {
+  const { status, name, message, code, stack, request } = page;
+
+  const errors = messagesOf(page.errors);
+  const file = stack[0]?.file ?? "";
+
+  return `<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
 
-  <title>{{ name }} - {{ message }}</title>
+  <title>${escape(name)} - ${escape(message)}</title>
 
   <meta name="viewport" content="width=device-width">
 
-  <meta name="description" content="{{ name }} - {{ message }}">
+  <meta name="description" content="${escape(name)} - ${escape(message)}">
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Outfit:wght@100..900&family=Recursive:wght@300..1000&display=swap");
@@ -316,40 +388,36 @@
 <body>
   <header class="title container">
     <h1>
-      {{ if context.response.status }}
-      {{ context.response.status }} -
-      {{ /if }}
-      <em>{{ name }}</em>
+      ${status ? `${status} -` : ""}
+      <em>${escape(name)}</em>
     </h1>
     <div class="subtitle">
-      {{ message }}
+      ${escape(message)}
     </div>
   </header>
 
   <main class="container">
-    {{ if errors?.length }}
-    <details class="errors card" open>
-      <summary>&nbsp;Errors {{ it.errors.length }}</summary>
+    ${
+    errors.length
+      ? `<details class="errors card" open>
+      <summary>&nbsp;Errors ${errors.length}</summary>
 
       <ul>
-        {{ for error of errors }}
-        {{ for message of error }}
-        <li>{{ message }}</li>
-        {{ /for }}
-        {{ /for }}
+        ${errors.map((error) => `<li>${escape(error)}</li>`).join("\n        ")}
       </ul>
-    </details>
-    {{ /if }}
+    </details>`
+      : ""
+  }
 
     <details class="code-container card" open>
       <summary>&nbsp;Originating file</summary>
 
       <div class="file-details">
         <div class="path">
-          <em>{{ stack.lines[0].file }}</em>
+          <em>${escape(file)}</em>
         </div>
         <div class="open">
-          <a href="vscode://file/{{ stack.lines[0].file }}" title="Open in code editor">
+          <a href="vscode://file/${escape(file)}" title="Open in code editor">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -360,30 +428,15 @@
       </div>
 
       <div class="code-window">
-        {{ code }}
+        ${code}
       </div>
     </details>
 
     <details class="stack card" open>
-      <summary>&nbsp;Stack trace ({{ stack.lines.length }})</summary>
+      <summary>&nbsp;Stack trace (${stack.length})</summary>
 
-      <ol style="counter-reset: countdown {{ stack.lines.length + 1 }}">
-        {{ for line of stack.lines }}
-        <li class="stack-line">
-          <div class="stack-line-container">
-            <div class="stack-line-content">
-              {{ if line.method }}
-              <div class="stack-line-method">{{ line.method }}</div>
-              {{ /if }}
-
-              {{ line.file }}
-            </div>
-            <div class="stack-line-position">
-              {{ line.line }}:{{ line.col }}
-            </div>
-          </div>
-        </li>
-        {{ /for }}
+      <ol style="counter-reset: countdown ${stack.length + 1}">
+        ${stack.map(stackLine).join("\n        ")}
       </ol>
     </details>
 
@@ -397,24 +450,26 @@
       <div class="request-details">
         <div class="key-value">
           <div class="key">URL</div>
-          <div class="value">{{ context.request.url }}</div>
+          <div class="value">${escape(request.url)}</div>
         </div>
 
         <div class="key-value">
           <div class="key">Method</div>
-          <div class="value">{{ context.request.method }}</div>
+          <div class="value">${escape(request.method)}</div>
         </div>
       </div>
 
       <h3>Headers</h3>
 
       <div class="request-headers">
-        {{ for key, value of context.request.headers }}
-        <div class="key-value">
-          <div class="key">{{ key }}</div>
-          <div class="value">{{ value }}</div>
-        </div>
-        {{ /for }}
+        ${
+    Object.entries(request.headers).map(([key, value]) =>
+      `<div class="key-value">
+          <div class="key">${escape(key)}</div>
+          <div class="value">${escape(value)}</div>
+        </div>`
+    ).join("\n        ")
+  }
       </div>
     </details>
 
@@ -425,3 +480,5 @@
 </body>
 
 </html>
+`;
+};

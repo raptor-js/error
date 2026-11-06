@@ -9,7 +9,10 @@ import type {
 import type { Config } from "./config.ts";
 import CodeExtractor from "./code/extractor.ts";
 import CodeHighlighter from "./code/highlighter.ts";
-import TemplateRenderer from "./template/renderer.ts";
+import productionPage from "../templates/production.ts";
+import developmentPage, {
+  type DevelopmentPage,
+} from "../templates/development.ts";
 import StackProcessor, { type StackTraceItem } from "./stack/processor.ts";
 
 /**
@@ -27,11 +30,6 @@ export default class Handler {
   private codeExtractor: CodeExtractor;
 
   /**
-   * The error template renderer.
-   */
-  private templateRenderer: TemplateRenderer;
-
-  /**
    * The code syntax highlighter.
    */
   private codeHighlighter: CodeHighlighter;
@@ -44,7 +42,6 @@ export default class Handler {
   constructor(config?: Config) {
     this.codeExtractor = new CodeExtractor();
     this.stackProcessor = new StackProcessor();
-    this.templateRenderer = new TemplateRenderer();
     this.codeHighlighter = new CodeHighlighter();
     this.config = config ?? this.initialiseDefaultConfig();
   }
@@ -130,6 +127,17 @@ export default class Handler {
       throw new ServerError("No error was available in the context");
     }
 
+    // Production shows no code, so nothing is read from disk.
+    if (this.config?.env !== "development") {
+      const { error } = context;
+
+      return productionPage({
+        status: "status" in error ? error.status : 500,
+        name: error.name,
+        message: error.message,
+      });
+    }
+
     this.stackProcessor.addStackData(context.error.stack as string);
 
     const stackLines = this.stackProcessor.process();
@@ -167,17 +175,9 @@ export default class Handler {
       decorationLine,
     );
 
-    const templatePath = new URL(
-      `../templates/${this.config?.env}.vto`,
-      import.meta.url,
-    );
-
-    const template = await this.templateRenderer.render(
-      templatePath.href,
+    return developmentPage(
       this.prepareResponsePayload(code, context.error, context, stackLines),
     );
-
-    return template.content;
   }
 
   /**
@@ -194,28 +194,18 @@ export default class Handler {
     error: RaptorError | Error,
     context: Context,
     stackLines: StackTraceItem[],
-  ) {
+  ): DevelopmentPage {
     return {
-      code,
-      context: {
-        request: {
-          url: context.request.url,
-          method: context.request.method,
-          referrer: context.request.referrer,
-          headers: Object.fromEntries(
-            context.request.headers.entries(),
-          ),
-        },
-        response: {
-          status: "status" in error ? error.status : 500,
-        },
-      },
+      status: "status" in error ? error.status : 500,
       name: error.name,
       message: error.message,
-      errors: "errors" in error ? error.errors : [],
-      stack: {
-        raw: error.stack,
-        lines: stackLines,
+      errors: "errors" in error ? error.errors : undefined,
+      code,
+      stack: stackLines,
+      request: {
+        url: context.request.url,
+        method: context.request.method,
+        headers: Object.fromEntries(context.request.headers.entries()),
       },
     };
   }

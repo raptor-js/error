@@ -1,7 +1,27 @@
-<html>
+import escape from "../src/template/escape.ts";
+
+/**
+ * What the production page shows: nothing about the code that failed.
+ */
+export interface ProductionPage {
+  status: number;
+  name: string;
+  message: string;
+}
+
+/**
+ * The production error page.
+ *
+ * @param page What to show.
+ * @returns The page as HTML.
+ */
+export default ({ status, name, message }: ProductionPage): string =>
+  `<html>
 
 <head>
-  <title>{{ context.response.status }} {{ name }} {{ message ? `- ${message}` : null }}</title>
+  <title>${status} ${escape(name)}${
+    message ? ` - ${escape(message)}` : ""
+  }</title>
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Outfit:wght@100..900&family=Recursive:wght@300..1000&display=swap");
@@ -78,10 +98,11 @@
 <body>
   <main class="container">
     <div>
-      <h1>{{ context.response.status }} - <em>{{ name }}</em></h1>
-      <div class="subtitle">{{ message }}</div>
+      <h1>${status} - <em>${escape(name)}</em></h1>
+      <div class="subtitle">${escape(message)}</div>
     </div>
   </main>
 </body>
 
 </html>
+`;

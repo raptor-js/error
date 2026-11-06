@@ -179,9 +179,9 @@ Deno.test("error handler creates correct structure", () => {
   assertEquals(payload.code, code);
   assertEquals(payload.name, "Error");
   assertEquals(payload.message, "Test error");
-  assertEquals(payload.context.request.method, "GET");
-  assertEquals(payload.context.response.status, 500);
-  assertEquals(payload.stack.lines.length, 1);
+  assertEquals(payload.request.method, "GET");
+  assertEquals(payload.status, 500);
+  assertEquals(payload.stack.length, 1);
 });
 
 Deno.test("error handler sets production env", () => {
@@ -197,4 +197,72 @@ Deno.test("error handler merges custom options", () => {
   const options = handler["initialiseDefaultConfig"]({ env: "development" });
 
   assertEquals(options.env, "development");
+});
+
+const asBrowser = (error: Error) =>
+  ({
+    error,
+    request: {
+      url: "http://localhost/test",
+      method: "GET",
+      headers: new Headers({ "accept": "text/html" }),
+      referrer: "",
+    },
+    response: { headers: new Headers() },
+  }) as unknown as Context;
+
+const notFound = (message: string) => {
+  const error = Object.assign(new Error(message), {
+    name: "Not Found",
+    status: 404,
+  });
+
+  error.stack = undefined;
+
+  return error;
+};
+
+Deno.test("error handler renders the production page without a stack or disk", async () => {
+  const handler = new ErrorHandler({ env: "production" });
+
+  const response = await handler["transformResponse"](
+    asBrowser(notFound("The resource requested could not be found")),
+  );
+
+  const body = await response.text();
+
+  assertEquals(response.status, 404);
+  assertEquals(
+    response.headers.get("content-type"),
+    "text/html; charset=utf-8",
+  );
+  assertEquals(body.includes("<h1>404 - <em>Not Found</em></h1>"), true);
+  assertEquals(
+    body.includes("<title>404 Not Found - The resource requested"),
+    true,
+  );
+});
+
+Deno.test("error handler escapes the production page", async () => {
+  const handler = new ErrorHandler({ env: "production" });
+
+  const response = await handler["transformResponse"](
+    asBrowser(notFound("<script>alert(1)</script>")),
+  );
+
+  const body = await response.text();
+
+  assertEquals(body.includes("<script>alert(1)</script>"), false);
+  assertEquals(body.includes("&lt;script&gt;alert(1)&lt;/script&gt;"), true);
+});
+
+Deno.test("error handler treats a missing env as production", async () => {
+  const handler = new ErrorHandler({});
+
+  const response = await handler["transformResponse"](
+    asBrowser(notFound("Gone")),
+  );
+
+  assertEquals(response.status, 404);
+  assertEquals((await response.text()).includes("<em>Not Found</em>"), true);
 });
